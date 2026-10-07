@@ -1,5 +1,6 @@
 #include "pch.h"
-#include "../LabMatrix/TVector.h"
+#include "../TVector.h"
+#include "../TMathVector.h"
 
 TEST(TVectorTest, Size)
 {
@@ -138,4 +139,91 @@ TEST(TVectorTest, ConstIterator)
     ++it;
 
     EXPECT_EQ(*it, 20);
+}
+TEST(TMathVectorTest, Addition)
+{
+    TMathVector<int> a(3);
+    TMathVector<int> b(3);
+
+    a[0] = 1;
+    a[1] = 2;
+    a[2] = 3;
+
+    b[0] = 4;
+    b[1] = 5;
+    b[2] = 6;
+
+    TMathVector<int> result = a + b;
+
+    EXPECT_EQ(result[0], 5);
+    EXPECT_EQ(result[1], 7);
+    EXPECT_EQ(result[2], 9);
+}
+
+TEST(TMathVectorTest, Subtraction)
+{
+    TMathVector<int> a(3);
+    TMathVector<int> b(3);
+
+    a[0] = 5;
+    a[1] = 7;
+    a[2] = 9;
+
+    b[0] = 1;
+    b[1] = 2;
+    b[2] = 3;
+
+    TMathVector<int> result = a - b;
+
+    EXPECT_EQ(result[0], 4);
+    EXPECT_EQ(result[1], 5);
+    EXPECT_EQ(result[2], 6);
+}
+
+TEST(TMathVectorTest, MultiplicationByNumber)
+{
+    TMathVector<int> vector(3);
+
+    vector[0] = 1;
+    vector[1] = 2;
+    vector[2] = 3;
+
+    TMathVector<int> result = vector * 5;
+
+    EXPECT_EQ(result[0], 5);
+    EXPECT_EQ(result[1], 10);
+    EXPECT_EQ(result[2], 15);
+}
+
+TEST(TMathVectorTest, ScalarProduct)
+{
+    TMathVector<int> a(3);
+    TMathVector<int> b(3);
+
+    a[0] = 1;
+    a[1] = 2;
+    a[2] = 3;
+
+    b[0] = 4;
+    b[1] = 5;
+    b[2] = 6;
+
+    EXPECT_EQ(a * b, 32);
+}
+
+TEST(TMathVectorTest, Equality)
+{
+    TMathVector<int> a(3);
+    TMathVector<int> b(3);
+
+    a[0] = 1;
+    a[1] = 2;
+    a[2] = 3;
+
+    b[0] = 1;
+    b[1] = 2;
+    b[2] = 3;
+
+    EXPECT_TRUE(a == b);
+    EXPECT_FALSE(a != b);
 }

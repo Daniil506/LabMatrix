@@ -208,6 +208,52 @@ public:
     {
         return const_iterator(_data + _size);
     }
+    TVector(const TVector& other)
+    {
+        _size = other._size;
+        _capacity = other._capacity;
+
+        if (_capacity > 0)
+        {
+            _data = new T[_capacity];
+
+            for (size_t i = 0; i < _size; i++)
+            {
+                _data[i] = other._data[i];
+            }
+        }
+        else
+        {
+            _data = nullptr;
+        }
+    }
+
+    TVector& operator=(const TVector& other)
+    {
+        if (this == &other)
+            return *this;
+
+        delete[] _data;
+
+        _size = other._size;
+        _capacity = other._capacity;
+
+        if (_capacity > 0)
+        {
+            _data = new T[_capacity];
+
+            for (size_t i = 0; i < _size; i++)
+            {
+                _data[i] = other._data[i];
+            }
+        }
+        else
+        {
+            _data = nullptr;
+        }
+
+        return *this;
+    }
 };
 
 #endif
