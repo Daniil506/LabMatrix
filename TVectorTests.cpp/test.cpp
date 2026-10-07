@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "../TVector.h"
 #include "../TMathVector.h"
-
+#include "../TMatrix.h"
 TEST(TVectorTest, Size)
 {
     TVector<int> vector(5);
@@ -226,4 +226,49 @@ TEST(TMathVectorTest, Equality)
 
     EXPECT_TRUE(a == b);
     EXPECT_FALSE(a != b);
+}
+TEST(TMatrixTest, Size)
+{
+    TMatrix<int> matrix(2, 3);
+
+    EXPECT_EQ(matrix.rows(), 2);
+    EXPECT_EQ(matrix.columns(), 3);
+}
+
+TEST(TMatrixTest, Index)
+{
+    TMatrix<int> matrix(2, 3);
+
+    matrix[0][0] = 10;
+    matrix[0][1] = 20;
+    matrix[0][2] = 30;
+
+    matrix[1][0] = 40;
+    matrix[1][1] = 50;
+    matrix[1][2] = 60;
+
+    EXPECT_EQ(matrix[0][0], 10);
+    EXPECT_EQ(matrix[0][1], 20);
+    EXPECT_EQ(matrix[0][2], 30);
+
+    EXPECT_EQ(matrix[1][0], 40);
+    EXPECT_EQ(matrix[1][1], 50);
+    EXPECT_EQ(matrix[1][2], 60);
+}
+
+TEST(TMatrixTest, InheritedVectorOperations)
+{
+    TMatrix<int> matrix(2, 3);
+
+    matrix[0][0] = 1;
+    matrix[0][1] = 2;
+    matrix[0][2] = 3;
+
+    matrix[1][0] = 4;
+    matrix[1][1] = 5;
+    matrix[1][2] = 6;
+
+    EXPECT_EQ(matrix.size(), 2);
+    EXPECT_EQ(matrix[0][1], 2);
+    EXPECT_EQ(matrix[1][2], 6);
 }
